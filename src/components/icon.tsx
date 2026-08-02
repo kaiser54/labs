@@ -7,6 +7,7 @@ const iconNames = [
   'filter',
   'close',
   'chevron-down',
+  'chevron-left',
   'check',
   'linear',
 ] as const

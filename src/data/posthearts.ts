@@ -11,6 +11,16 @@ export const tabs = [
   { id: 'resolved' as const, label: 'Resolved', count: 5 },
 ]
 
+export type Comment = {
+  id: string
+  name: string
+  time: string
+  body: string
+  avatar?: string
+  initials?: string
+  initialsColor?: string
+}
+
 export type Thread = {
   id: string
   name: string
@@ -24,6 +34,40 @@ export type Thread = {
   attachment?: string
   issue?: string
   replies?: { count: number; avatars: string[] }
+  comments?: Comment[]
+}
+
+export function getThreadComments(thread: Thread): Comment[] {
+  if (thread.comments?.length) return thread.comments
+
+  const root: Comment = {
+    id: `${thread.id}-root`,
+    name: thread.name,
+    time: thread.time,
+    body: thread.body,
+    avatar: thread.avatar,
+    initials: thread.initials,
+    initialsColor: thread.initialsColor,
+  }
+
+  const replyCount = thread.replies?.count ?? 0
+  if (replyCount === 0) return [root]
+
+  const avatars = thread.replies?.avatars ?? []
+  const replies = Array.from({ length: Math.min(replyCount, 4) }, (_, i) => ({
+    id: `${thread.id}-r${i}`,
+    name: i === 0 ? 'Ayomide Daniel' : i === 1 ? 'Gavin Nelson' : `Reply ${i + 1}`,
+    time: i === 0 ? '8m' : `${i + 1}h`,
+    body:
+      i === 0
+        ? 'Agreed — the nested stack feel is what sells it. Peek + fade on the parent is the key.'
+        : i === 1
+          ? 'Shadow stack next, then we can polish the composer.'
+          : 'Sounds good, shipping a sandbox for the stack motion.',
+    avatar: avatars[i % avatars.length],
+  }))
+
+  return [root, ...replies]
 }
 
 export const threads: Thread[] = [
