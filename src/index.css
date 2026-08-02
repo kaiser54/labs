@@ -2,12 +2,35 @@
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
 @import "@fontsource-variable/geist";
+@import "@fontsource-variable/inter";
 
 @custom-variant dark (&:is(.dark *));
+
+:root {
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
 
 @theme inline {
     --font-heading: var(--font-sans);
     --font-sans: 'Geist Variable', sans-serif;
+    --font-inter: 'Inter Variable', Inter, sans-serif;
+    --font-code: ui-monospace, 'SF Mono', SFMono-Regular, Menlo, Consolas, monospace;
+    --color-ph-text: #2a2a2a;
+    --color-ph-muted: #8d8d8d;
+    --color-ph-bg: #f5f5f5;
+    --color-ph-border: #e6e6e6;
+    --color-ph-divider: #f5f5f5;
+    --color-ph-accent: #645ef5;
+    --color-ph-success: #5fc381;
+    --color-ph-clicked: #e6e6e6;
+    --shadow-ph:
+      0 12px 32px rgb(44 49 55 / 0.2), 0 16px 16px -8px rgb(44 49 55 / 0.04),
+      0 0 0 1px rgb(44 49 55 / 0.04);
+    --text-ph: 13px;
+    --text-ph--line-height: 19px;
     --color-sidebar-ring: var(--sidebar-ring);
     --color-sidebar-border: var(--sidebar-border);
     --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
@@ -127,4 +150,11 @@
   html {
     @apply font-sans;
     }
+}
+
+/* Base UI drawer sizing — kept out of className to avoid TW arbitrary-var noise */
+.posthearts-drawer {
+  --drawer-inset: 12px;
+  --drawer-content-width: min(360px, calc(100vw - 24px));
+  --drawer-content-height: calc(100dvh - 24px);
 }
