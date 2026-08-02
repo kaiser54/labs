@@ -2,7 +2,7 @@
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
 @import "@fontsource-variable/geist";
-@import "@fontsource-variable/inter";
+@import "@fontsource-variable/inter/opsz.css";
 
 @custom-variant dark (&:is(.dark *));
 
@@ -16,7 +16,7 @@
 @theme inline {
     --font-heading: var(--font-sans);
     --font-sans: 'Geist Variable', sans-serif;
-    --font-inter: 'Inter Variable', Inter, sans-serif;
+    --font-inter: 'Inter Variable', ui-sans-serif, system-ui, sans-serif;
     --font-code: ui-monospace, 'SF Mono', SFMono-Regular, Menlo, Consolas, monospace;
     --color-ph-text: #2a2a2a;
     --color-ph-muted: #8d8d8d;
@@ -29,8 +29,6 @@
     --shadow-ph:
       0 12px 32px rgb(44 49 55 / 0.2), 0 16px 16px -8px rgb(44 49 55 / 0.04),
       0 0 0 1px rgb(44 49 55 / 0.04);
-    --text-ph: 13px;
-    --text-ph--line-height: 19px;
     --color-sidebar-ring: var(--sidebar-ring);
     --color-sidebar-border: var(--sidebar-border);
     --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
@@ -152,9 +150,23 @@
     }
 }
 
-/* Base UI drawer sizing — kept out of className to avoid TW arbitrary-var noise */
-.posthearts-drawer {
-  --drawer-inset: 12px;
-  --drawer-content-width: min(360px, calc(100vw - 24px));
-  --drawer-content-height: calc(100dvh - 24px);
+/* type-ph (not text-*) so twMerge won’t clash with text-ph-text colors */
+@utility font-inter {
+  font-family: var(--font-inter);
+  font-optical-sizing: auto;
+  letter-spacing: 0;
+}
+
+@utility type-ph {
+  font-size: 13px;
+  line-height: 19px;
+}
+
+@utility type-ph-micro {
+  font-size: 12px;
+  line-height: 18px;
+}
+
+@utility font-ph-regular {
+  font-weight: 420;
 }
